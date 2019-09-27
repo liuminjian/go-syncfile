@@ -1,0 +1,32 @@
+syntax = "proto3";
+service WatchMgr {
+    rpc watchFile (File) returns (stream FileEvent) {}
+    rpc watchFileAndSync (SyncFile) returns (stream SyncFileResp) {}
+}
+
+message File {
+    string name = 1;
+    bool recursive = 2;
+}
+
+message SyncFile{
+    string name = 1;
+    bool recursive = 2;
+    string ip = 3;
+    int32 port = 4;
+    string user = 5;
+    string password = 6;
+    string remotePath = 7;
+}
+
+message FileEvent {
+    string message = 1;
+}
+
+message SyncFileResp {
+    int32 code = 1;
+    string Name = 2;
+    string output = 3;
+    string error = 4;
+}
+
